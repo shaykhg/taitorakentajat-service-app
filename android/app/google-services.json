@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "322087482745",
+    "project_id": "taitorakentajat-b0418",
+    "storage_bucket": "taitorakentajat-b0418.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322087482745:android:d8c22ee2fa6acd65532ba8",
+        "android_client_info": {
+          "package_name": "fi.taito.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322087482745-1coj9uqhhrfgd9u8poai1k281u7ec29n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkIv8Ffg3q229I7pR6NIhO-Eal6vhgG5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322087482745-1coj9uqhhrfgd9u8poai1k281u7ec29n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322087482745:android:7fd037004516488c532ba8",
+        "android_client_info": {
+          "package_name": "fi.taito.service"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322087482745-1coj9uqhhrfgd9u8poai1k281u7ec29n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkIv8Ffg3q229I7pR6NIhO-Eal6vhgG5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322087482745-1coj9uqhhrfgd9u8poai1k281u7ec29n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

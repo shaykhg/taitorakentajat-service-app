@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelOrder()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Booking Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="booking">
+
+
+  <div class="ion-text-center">
+    <ion-spinner *ngIf="progress; else bookingDetail" class="m-t-100" color="#4caf50" name="lines"></ion-spinner>
+  </div>
+
+  <ng-template #bookingDetail>
+    <mat-tab-group>
+      <mat-tab label="Order Info">
+        <app-order-view [booking]="booking"></app-order-view>
+      </mat-tab>
+
+      <mat-tab label="Services">
+        <app-services-view [booking]="booking"></app-services-view>
+      </mat-tab>
+
+      <mat-tab label="Packages">
+        <app-package-view [booking]="booking"></app-package-view>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-template>
+
+</ion-content>

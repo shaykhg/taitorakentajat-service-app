@@ -1,0 +1,37 @@
+.save{
+  background-color: #2fdf75;
+  color: white;
+}
+
+.booking-cont{
+  border-radius: 16px;
+  padding: 12px;
+  font-size: medium;
+  color: #414141;
+}
+
+.booking-item{
+  margin-top: 10px;
+  display: flex;
+}
+.icon{
+  margin-right: 10px;
+  font-size: 24px;
+}
+.booking-item-title{
+  align-self: center;
+}
+
+.booking-btn{
+  background: #d5eed5;
+  color: black;
+  padding: 6px 30px;
+  text-align: center;
+  width: 100%;
+  border-radius: 15px;
+  margin: 10px 10px;
+}
+
+ion-spinner {
+  transform: scale(2);
+}

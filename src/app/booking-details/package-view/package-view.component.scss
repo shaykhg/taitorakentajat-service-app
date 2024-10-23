@@ -1,0 +1,36 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.content{
+  padding: 4px;
+  text-align: left;
+}
+
+.booking-card{
+  margin: 12px;
+  border-radius: 12px;
+}
+
+.heading{
+  font-size: large;
+  color: #4caf50;
+  margin-bottom: 12px;
+}
+
+.thumbnail {
+  height: 80px;
+  width: 80px;
+}
+
+.status-chip{
+  border-radius: 12px;
+  color: white;
+  padding: 4px 12px;
+  font-size: small;
+}
+
+.prod-img{
+  width: 70px;
+  height: 70px;
+}

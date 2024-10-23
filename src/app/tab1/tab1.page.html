@@ -1,0 +1,136 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Hello {{username}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="row m-t-20 p-l-15 p-r-15">
+    <button class=" col" mat-flat-button [class]="type === 2 ? 'tab-btn': 'tab-btn-selected'" (click)="this.type = 2 ">Month View</button>
+
+    <button class=" col" mat-flat-button [class]="type === 1 ? 'tab-btn': 'tab-btn-selected'" (click)="(this.type = 1) && getAllBookings()">All Orders</button>
+
+
+  </div>
+
+  <div *ngIf="type === 2">
+    <div class="parent-cal">
+      <ion-card class="scrollmenu">
+        <a *ngFor="let day of dates" (click)="getBookings(day)">
+          <div [ngClass]="selectedDate === day ? 'selected-date' : ''">
+            <div>{{day.name}}</div>
+            <div class="m-t-8">{{day.date}}</div>
+          </div>
+        </a>
+      </ion-card>
+    </div>
+
+    <div class="ion-text-center">
+      <ion-spinner *ngIf="progress; else booking" class="m-t-100" color="#4caf50" name="lines"></ion-spinner>
+    </div>
+
+    <ng-template #booking>
+      <div *ngIf="bookings.length > 0; else noBooking">
+        <div *ngFor="let booking of bookings">
+          <mat-card class="booking-cont">
+            <div class="booking-item m-b-15 ion-justify-content-between">
+              <span class="ion-align-self-center"><b>#{{booking.id}}</b></span>
+              <span class="fs-24">
+              <ion-icon *ngIf="!booking.expanded" (click)="booking.expanded = !booking.expanded" name="add-circle-outline"></ion-icon>
+            <ion-icon  *ngIf="booking.expanded"   (click)="booking.expanded = !booking.expanded"  name="remove-circle-outline"></ion-icon>
+            </span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="person-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.fname}} {{booking.lname}}</span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="home-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.building}}, {{booking.city}}, {{booking.postcode}}</span>
+            </div>
+
+            <div class="booking-item">
+              <span><ion-icon name="calendar-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{getTime(booking.date)}}</span>
+            </div>
+
+
+            <div class="dis-flex m-t-20" *ngIf="booking.expanded">
+              <button mat-flat-button [routerLink]="'/booking-details/' + booking.id" class=" booking-btn">Details</button>
+
+              <button mat-flat-button class=" booking-btn" (click)="customerDetail(booking)" [disabled]="booking.status ? (booking.status !== 'PENDING') : false">Edit</button>
+
+              <button [disabled]="booking.status ? (booking.status !== 'PENDING') : false" (click)="showApprovalAlert(booking.id)" mat-flat-button class=" booking-btn">{{booking.status ? (booking.status === 'APPROVED'? 'Approved' : 'Approve') : 'Approve'}}</button>
+            </div>
+          </mat-card>
+        </div>
+
+      </div>
+
+      <ng-template #noBooking>
+        <div class="ion-text-center m-t-100">
+          <img src="/assets/images/box-green.png" alt="" style="width: 25%;height: auto">
+        </div>
+        <h2 class="ion-text-center m-t-20 green">No Bookings found!</h2>
+      </ng-template>
+    </ng-template>
+
+  </div>
+
+  <div *ngIf="type === 1">
+    <div class="ion-text-center">
+      <ion-spinner *ngIf="progress; else booking" class="m-t-100" color="#4caf50" name="lines"></ion-spinner>
+    </div>
+
+    <ng-template #booking>
+      <div *ngIf="allBookings.length > 0; else noBooking">
+        <div *ngFor="let booking of allBookings">
+          <div class="booking-cont">
+            <div class="booking-item m-b-15 ion-justify-content-between">
+              <span class="ion-align-self-center"><b>#{{booking.id}}</b></span>
+              <span class="fs-24">
+              <ion-icon *ngIf="!booking.expanded" (click)="booking.expanded = !booking.expanded" name="add-circle-outline"></ion-icon>
+            <ion-icon  *ngIf="booking.expanded"   (click)="booking.expanded = !booking.expanded"  name="remove-circle-outline"></ion-icon>
+            </span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="person-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.fname}} {{booking.lname}}</span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="home-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.building}}, {{booking.city}}, {{booking.postcode}}</span>
+            </div>
+
+            <div class="booking-item">
+              <span><ion-icon name="calendar-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{getTime(booking.date)}}</span>
+            </div>
+
+
+            <div class="dis-flex m-t-20" *ngIf="booking.expanded">
+              <button mat-flat-button [routerLink]="'/booking-details/' + booking.id" class=" booking-btn">Details</button>
+
+              <button mat-flat-button class=" booking-btn" (click)="customerDetail(booking)" [disabled]="booking.status ? (booking.status === 'APPROVED' || booking.status === 'CANCELLED') : false">Edit</button>
+
+              <button [disabled]="booking.status ? (booking.status !== 'PENDING') : false" (click)="showApprovalAlert(booking.id)" mat-flat-button class=" booking-btn">{{booking.status ? (booking.status === 'APPROVED'? 'Approved' : 'Approve') : 'Approve'}}</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <ng-template #noBooking>
+        <div class="ion-text-center m-t-100">
+          <img src="/assets/images/box-green.png" alt="" style="width: 25%;height: auto">
+        </div>
+        <h2 class="ion-text-center m-t-20 green">No Bookings found!</h2>
+      </ng-template>
+    </ng-template>
+  </div>
+
+
+
+</ion-content>

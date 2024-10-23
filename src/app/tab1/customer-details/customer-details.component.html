@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Services
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelOrder()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <mat-tab-group *ngIf="data.customerDetail">
+    <mat-tab label="Services">
+      <div class="fixed">
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addMoreService()">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      </div>
+
+<!--      <mat-card *ngFor="let service of data.customerDetail.services" class="booking-card mat-elevation-z3">-->
+<!--        <div class="row">-->
+<!--          <div class="col heading"><b>{{service.name}}</b></div>-->
+<!--          <div class="col-auto heading"><b>&euro;{{service.price}}</b></div>-->
+<!--          <div class="col-auto align-items-center" (click)="deleteAlert(service)"><span class="mdi mdi-close fs-24 red-color"></span></div>-->
+<!--        </div>-->
+
+<!--        <div (click)="openBottomSheet(service)">-->
+<!--          <div class="row pt-4" *ngFor="let value of service.arr ? service.arr : getServiceProps(service)">-->
+<!--            <div class="col-6">-->
+<!--              <span>{{value.key}}</span>-->
+<!--            </div>-->
+<!--            <div class="col-6">-->
+<!--              <span *ngIf="value.key.toLowerCase() === 'price'"><b>&euro;</b></span>-->
+<!--              <span><b>{{value.value}}</b></span>-->
+<!--              <span *ngIf="value.key.toLowerCase().includes('size')"><b>m<sup>2</sup></b></span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </mat-card>-->
+
+      <mat-card *ngFor="let service of data.customerDetail.services" class="booking-card mat-elevation-z3">
+        <div class="row heading">
+          <div class="col heading"><b>{{service.name}}</b></div>
+          <div class="col-auto heading"><b>&euro;{{service.price.toFixed(2)}}</b></div>
+          <div class="col-auto align-items-center" (click)="deleteAlert(service)"><span class="mdi mdi-close fs-24 red-color"></span></div>
+        </div>
+
+        <div>
+          <div class="" *ngFor="let value of service.arr ? service.arr : getServiceProps(service); index as i" (click)="openBottomSheet(service)">
+            <div class="row pt-4" *ngIf="(value.key !== 'key' || value.key !== 'expand') && i < service.expand">
+              <div class="col-6">
+                <span>{{value.key | titlecase}}</span>
+              </div>
+              <div class="col-6">
+                <span *ngIf="value.key.toLowerCase() === 'price'"><b>&euro;</b></span>
+                <span><b>{{value.value === false || value.value === true ? (value.value === false ? 'NO' : 'Yes') : value.value}}</b></span>
+                <span *ngIf="value.key.toLowerCase().includes('size')"><b>m<sup>2</sup></b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="t-right">
+            <span class="mdi mdi-chevron-up fs-24" (click)="service.expand = 3" *ngIf="service.expand > 3"></span>
+            <span class="mdi mdi-chevron-down fs-24" (click)="service.expand = 99" *ngIf="service.expand === 3"></span>
+            <span (click)="service.expand = service.expand === 3 ? 99 : 3">{{service.expand === 33 ? 'Show Less' : 'Show More'}}</span>
+          </div>
+        </div>
+
+      </mat-card>
+
+    </mat-tab>
+    <mat-tab label="User Info">
+      <app-order-view [booking]="data.customerDetail"></app-order-view>
+    </mat-tab>
+  </mat-tab-group>
+</ion-content>

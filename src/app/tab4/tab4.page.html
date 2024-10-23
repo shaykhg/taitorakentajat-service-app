@@ -1,0 +1,141 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <form [formGroup]="profileForm">
+      <mat-card class="my-4 mat-elevation-z3 prop_card">
+        <!--        <div class="text-end ">-->
+        <!--          <button class="edit_btn" (click)="editProfile()" *ngIf="!hideBtn">-->
+        <!--            <ion-icon name="create-outline"></ion-icon>-->
+        <!--          </button>-->
+        <!--        </div>-->
+        <div class="text-center my-3">
+          <div class="container">
+            <div class="avatar-upload">
+              <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" />
+                <label for="imageUpload"><svg style="width:20px;height:20px;margin: 6px 0px;" viewBox="0 0 24 24">
+                  <path fill="#767676" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                </svg></label>
+              </div>
+              <div class="avatar-preview">
+                <img  src="./assets/img/user.png" alt="" style="box-shadow: 0 0 88px #c7c7c7;" *ngIf="!imageUrl && !session.getUser().avatar">
+                <img  [src]="imageUrl" alt="" style="box-shadow: 0 0 88px #c7c7c7;" *ngIf="imageUrl">
+                <img  [src]="util.IMAGE_BASE_URL + session.getUser().avatar.url" alt="" style="box-shadow: 0 0 88px #c7c7c7;" *ngIf="session.getUser().avatar && !imageUrl">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!nameField">
+          <div class="col-2 align-self-center text-center fs-3">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <div class="col-10" >
+            <mat-form-field class="w-100">
+              <mat-label>Name</mat-label>
+              <input  matInput type="text" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+      <div label="User Profile">
+        <mat-card class="rounded-5 my-4 mat-elevation-z3 prop_card">
+
+
+          <div class="row" *ngIf="nameField">
+            <div class="col-2 align-self-center text-center fs-3">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <div class="col-10">
+              <mat-form-field class="w-100">
+                <mat-label>Name</mat-label>
+                <input  matInput type="text" formControlName="name">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2 align-self-center text-center fs-3">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+            <div class="col-10">
+              <mat-form-field class="w-100">
+                <mat-label>Phone</mat-label>
+                <input  matInput type="text" formControlName="phone">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2 align-self-center text-center fs-3">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="col-10">
+              <mat-form-field class="w-100">
+                <mat-label>Email</mat-label>
+                <input  matInput type="text" formControlName="email" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2 align-self-center text-center fs-3">
+              <ion-icon name="map-outline"></ion-icon>
+            </div>
+            <div class="col-10">
+              <mat-form-field class="w-100">
+                <mat-label>City</mat-label>
+                <input  matInput type="text" formControlName="city">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2 align-self-center text-center fs-3">
+              <ion-icon name="language-outline"></ion-icon>
+            </div>
+            <div class="col-10">
+              <mat-form-field class="w-100">
+                <mat-label>Choose an option</mat-label>
+                <mat-select (selectionChange)="changeLang($event)">
+                  <mat-option value="en">English</mat-option>
+                  <mat-option value="fi">Finnish</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-center">
+              <button (click)="updateProfile()" class="update_btn"  mat-stroked-button>Update Profile</button>
+            </div>
+            <!--            <div class="text-center" *ngIf="session.getUser().role === 'company'">-->
+            <!--              <button class="update_btn" mat-stroked-button routerLink="add-user-detail">Add User Detail</button>-->
+            <!--            </div>-->
+          </div>
+
+        </mat-card>
+
+        <div class="text-center">
+          <button mat-raised-button class="logout_btn" (click)="logout()">Logout</button>
+
+        </div>
+
+      </div>
+
+
+      <!--  <p>{{session.getUser().id}}</p>-->
+      <!--  <p>{{session.getUser().name}}</p>-->
+      <!--  <p>{{session.getUser().email}}</p>-->
+    </form>
+  </div>
+
+
+</ion-content>

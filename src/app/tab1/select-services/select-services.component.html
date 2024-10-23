@@ -1,0 +1,37 @@
+
+<!--<div *ngIf="dataShare.addFormVisible || dataShare.order.services.length === 0" class="container mt-4">-->
+<!--  <mat-card class="prop_card">-->
+<!--    <div>-->
+<!--      <h5 class="text-capitalize">Select Service <sub class="info" matTooltip="Info about the action"> &#8505;</sub>-->
+<!--      </h5>-->
+<!--      <p class="fw-medium">Services</p>-->
+<!--    </div>-->
+<!--    <mat-form-field appearance="fill" class="w-100">-->
+<!--      <mat-label>Select Service</mat-label>-->
+<!--      <mat-select (selectionChange)="changeValue($event)">-->
+<!--        <mat-option *ngFor="let service of dataShare.apiService" [value]="service">-->
+<!--          <div class="row">-->
+<!--            <div class="col-6 text-start">-->
+<!--              <span>{{service.name}}</span>-->
+<!--            </div>-->
+<!--            <div class="col-6 text-end">-->
+<!--              <span>{{service.price}}€</span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
+
+
+<!--    <app-custom-services [chooseService]="this.dataShare.serviceValue"></app-custom-services>-->
+<!--  </mat-card>-->
+
+
+<!--</div>-->
+
+
+<!--<div class="mt-4 mb-5 text-center">-->
+<!--  <button  class="btn_btn" color="primary" mat-raised-button type="submit" [disabled]="!customerDetailForm.valid || dataShare.order.services.length === 0" (click)="moveNext()" >Continue to packages</button>-->
+<!--  &lt;!&ndash;  <button  class="btn_btn" color="primary" mat-raised-button type="submit" (click)="stepper.next()" >Continue to packages</button>&ndash;&gt;-->
+<!--</div>-->

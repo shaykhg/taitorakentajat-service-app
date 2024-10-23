@@ -1,0 +1,24 @@
+<div class="login-bg">
+    <ion-card class="card-margin bo-rad-15">
+      <div class="card-padding t-center">
+        <img src="../../assets/images/logo.png" width="96" height="96">
+
+        <h3>Login To Continue</h3>
+
+       <form [formGroup]="loginForm" (ngSubmit)="login()">
+         <mat-form-field class="w-full" appearance="outline">
+           <mat-label>Enter Email</mat-label>
+           <input matInput placeholder="Email" type="email" formControlName="email">
+         </mat-form-field>
+
+         <mat-form-field class="w-full" appearance="outline">
+           <mat-label>Enter Password</mat-label>
+           <input matInput placeholder="Password" type="password" formControlName="password">
+         </mat-form-field>
+
+         <button mat-raised-button class="login-btn" [disabled]="!loginForm.valid" type="submit">Login</button>
+       </form>
+
+      </div>
+    </ion-card>
+</div>

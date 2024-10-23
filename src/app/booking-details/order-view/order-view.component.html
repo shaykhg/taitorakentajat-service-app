@@ -1,0 +1,237 @@
+<div class="t-left item-container">
+
+  <mat-card class="mat-elevation-z3 booking-card">
+    <div class="heading"><b>Order Info</b></div>
+    <div>
+      <span class="pe-2">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+           <path fill="#767676"
+                 d="M10 7V9H9V15H10V17H6V15H7V9H6V7H10M16 7C17.11 7 18 7.9 18 9V15C18 16.11 17.11 17 16 17H12V7M16 9H14V15H16V9Z"/>
+          </svg>
+          </span>
+      <span class="m-l-16" (click)="util.copyToClipBoard(booking.id, 'Order id copied to clipboard successfully!')">{{booking.id}}</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-calendar-clock fs-24"></span>
+      <span class="m-l-16">{{util.getHumanDateTime(booking.date)}}</span>
+    </div>
+
+    <div *ngIf="booking.approved">
+      <span class="mdi mdi-check-all fs-24"></span>
+      <span class="m-l-16">Approved</span>
+    </div>
+
+    <div *ngIf="!booking.approved">
+      <span class="mdi mdi-alert-octagon-outline fs-24"></span>
+      <span class="m-l-16">Not Approved</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-adjust fs-24"></span>
+      <span class="m-l-16 status-chip" [style.backgroundColor]="util.getStatus(booking.status)">{{booking.status | uppercase}}</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-currency-eur fs-24"></span>
+      <span class="m-l-16"><b>{{booking.total.toFixed(2)}}</b></span>
+    </div>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z3 booking-card">
+    <div class="heading"><b>Customer Info</b></div>
+    <div>
+      <span class="mdi mdi-account-outline fs-24"></span>
+      <span class="m-l-16">{{booking.fname | titlecase}} {{booking.lname | titlecase}}</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-email-outline fs-24"></span>
+      <span class="m-l-16">{{booking.email}}</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-phone-outline fs-24"></span>
+      <span class="m-l-16">{{booking.phone}}</span>
+    </div>
+
+    <div>
+      <span class="mdi mdi-map-marker-outline fs-24"></span>
+      <span class="m-l-16">{{booking.building | titlecase}}, {{booking.city | titlecase}}, {{booking.postcode | titlecase}}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z3 booking-card">
+    <div class="heading"><b>Property Info</b></div>
+    <div class="row">
+      <div class="col align-self-center">
+        <span class="mdi mdi-ruler-square fs-24"></span>
+        <span class="m-l-12">Property Size</span>
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-16">{{booking.propertySize}} metre<sup>2</sup></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col align-self-center">
+        <span class="mdi mdi-sort-clock-descending-outline fs-24"></span>
+        <span class="m-l-12">Property Type</span>
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-16">{{booking.propertyType | titlecase}}</span>
+      </div>
+    </div>
+
+<!--    <div class="row">-->
+<!--      <div class="col align-self-center">-->
+<!--        <span class="mdi mdi-clock-outline fs-24"></span>-->
+<!--        <span class="m-l-12">Custom Time</span>-->
+<!--      </div>-->
+<!--      <div class="col align-self-center">-->
+<!--        <span class="m-l-16">{{booking.timeNotFound ? 'YES' : 'NO' }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="row" *ngIf="booking.renovation">
+      <div class="col align-self-center">
+        <span class="mdi mdi-calendar fs-24"></span>
+        <span class="m-l-12">Renovation</span>
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-16">{{util.getIndianDate(booking.renovation)}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col align-self-center">
+        <span class="mdi mdi-map-marker-outline fs-24"></span>
+        <span class="m-l-12"></span>
+        City
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-16">{{booking.city | titlecase}}, {{booking.postcode | titlecase}}</span>
+      </div>
+    </div>
+
+    <hr>
+    <div class="heading">Images</div>
+    <div class="row">
+      <div class="col" *ngFor="let image of booking.images" (click)="openViewer(util.BASE_URL + image.url)">
+        <img [src]="util.BASE_URL + image.url" class="thumbnail">
+      </div>
+    </div>
+
+  </mat-card>
+
+  <mat-card class="mat-elevation-z3 booking-card">
+    <div class="heading"><b>Additional Info</b></div>
+
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <span class="mdi mdi-account-group-outline fs-24"></span>-->
+<!--        <span class="m-l-12">Company Size</span>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <span class="m-l-16">{{booking.companySize | titlecase}}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <span class="mdi mdi-sort-clock-descending-outline fs-24"></span>-->
+<!--        <span class="m-l-12">Experience</span>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <span class="m-l-16">{{booking.experience | titlecase}}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <span class="mdi mdi-clock-outline fs-24"></span>-->
+<!--        <span class="m-l-12">Custom Time</span>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <span class="m-l-16">{{booking.timeNotFound ? 'YES' : 'NO' }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="row" *ngIf="booking.renovation">
+      <div class="col">
+        <span class="mdi mdi-calendar fs-24"></span>
+        <span class="m-l-12">Renovation</span>
+      </div>
+      <div class="col">
+        <span class="m-l-16">{{util.getIndianDate(booking.renovation)}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col align-self-center">
+        <span class="mdi mdi-account-plus-outline fs-24"></span>
+        <span class="m-l-12">Buy Self</span>
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-12">{{booking.buySelf ? 'Yes' : 'No'}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col align-self-center">
+        <span class="mdi mdi-handshake-outline fs-24"></span>
+        <span class="">Buying Asst.</span>
+      </div>
+      <div class="col align-self-center">
+        <span class="m-l-12">{{booking.assist ? 'Yes' : 'No'}}</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="booking.contactEmail">
+      <div class="col">
+        <span class="mdi mdi-email-outline fs-24"></span>
+        <span class="m-l-12">Email</span>
+      </div>
+      <div class="col">
+        <span class="m-l-16">{{booking.contactEmail}}</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="booking.contactPhone">
+      <div class="col">
+        <span class="mdi mdi-phone-outline fs-24"></span>
+        <span class="m-l-12">Phone</span>
+      </div>
+      <div class="col">
+        <span class="m-l-16">{{booking.contactPhone}}</span>
+      </div>
+    </div>
+
+  </mat-card>
+
+  <mat-card class="mat-elevation-z3 booking-card" *ngIf="booking.notes || booking.serviceNotes || booking.companyNotes">
+   <div *ngIf="booking.notes">
+     <div class="heading"><b>Customer Notes</b></div>
+     <div>
+       <span class="m-l-16">{{booking.notes}}</span>
+     </div>
+   </div>
+
+    <div *ngIf="booking.serviceNotes">
+    <div class="heading m-t-12"><b>Service Notes</b></div>
+    <div>
+      <span class="m-l-16">{{booking.serviceNotes}}</span>
+    </div>
+    </div>
+
+   <div *ngIf="booking.companyNotes">
+     <div class="heading m-t-12"><b>Company Notes</b></div>
+     <div>
+       <span class="m-l-16">{{booking.companyNotes}}</span>
+     </div>
+   </div>
+  </mat-card>
+
+
+
+</div>

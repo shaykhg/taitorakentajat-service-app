@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Service</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()"><ion-icon name="close" class="fs-28"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+    <mat-card class="add-card mat-elevation-z3">
+      <mat-form-field appearance="outline" class="content-margin w-full m-t-12">
+        <mat-label>Select a service</mat-label>
+        <mat-select [(ngModel)]="service" (selectionChange)="changedService($event)">
+          <mat-option *ngFor="let service of services" [value]="service">{{service.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="serviceExists" class="overwrite">
+        Selected service already exists in order, adding this service again will overwrite the previous information.
+      </div>
+
+      <div *ngIf="service">
+        <app-floor-repair [service]="service" (serviceComplete)="updateService($event)" *ngIf="service.viewType === 6"></app-floor-repair>
+        <app-paint [service]="service" (serviceComplete)="updateService($event)" *ngIf="service.viewType === 7"></app-paint>
+      </div>
+
+    </mat-card>
+
+
+
+  </div>
+
+  <!--  <div *ngIf="serviceData">-->
+
+
+
+
+</ion-content>
+

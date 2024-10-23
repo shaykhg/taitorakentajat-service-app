@@ -1,0 +1,30 @@
+<div class="content">
+  <mat-card *ngFor="let service of booking.services" class="booking-card mat-elevation-z3">
+    <div class="row heading">
+      <div class="col"><b>{{service.name}}</b></div>
+      <div class="col-auto"><b>&euro;{{service.price.toFixed(2)}}</b></div>
+    </div>
+
+    <div *ngIf="service.viewType >= 6" class="mt-4">
+        <div class="" *ngFor="let value of service.arr ? service.arr : getServiceProps(service); index as i">
+          <div class="row pt-4" *ngIf="(value.key !== 'key' || value.key !== 'expand') && i < service.expand">
+            <div class="col-6">
+              <span>{{value.key | titlecase}}</span>
+            </div>
+            <div class="col-6">
+              <span *ngIf="value.key.toLowerCase() === 'price'"><b>&euro;</b></span>
+              <span><b>{{value.value === false || value.value === true ? (value.value === false ? 'NO' : 'Yes') : value.value}}</b></span>
+              <span *ngIf="value.key.toLowerCase().includes('size')"><b>m<sup>2</sup></b></span>
+            </div>
+          </div>
+        </div>
+
+      <div class="t-right">
+        <span class="mdi mdi-chevron-up fs-24" (click)="service.expand = 3" *ngIf="service.expand > 3"></span>
+        <span class="mdi mdi-chevron-down fs-24" (click)="service.expand = 99" *ngIf="service.expand === 3"></span>
+        <span (click)="service.expand = service.expand === 3 ? 99 : 3">{{service.expand === 33 ? 'Show Less' : 'Show More'}}</span>
+      </div>
+    </div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,96 @@
+.prev-next-btn{
+  color: #003c8f;
+  border-radius: 50%;
+  border: 1px solid #003c8f;
+  background: white;
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+
+.add-slot-btn{
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+.btn-avail{
+  color: white;
+  padding: 1px 15px;
+  background: #4caf50;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.scrollmenu a {
+  display: inline-block;
+  color: grey;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.selected-date {
+  color: #4caf50;
+}
+
+.booking-cont{
+  background-color: #d5eed5;
+  padding: 12px;
+  font-size: medium;
+  color: #414141;
+  margin: 12px;
+  border-radius: 16px;
+}
+
+.booking-item{
+  margin-top: 10px;
+  display: flex;
+}
+.icon{
+  margin-right: 10px;
+  font-size: 24px;
+}
+.booking-item-title{
+  align-self: center;
+}
+
+.booking-btn{
+  background: #4caf50;
+  color: white;
+  padding: 0 30px;
+  text-align: center;
+  width: 100%;
+  border-radius: 15px;
+  margin: 10px 10px;
+}
+
+ion-spinner {
+  transform: scale(2);
+}
+
+
+.tab-btn{
+  background-color: #4caf50;
+  color: white;
+  margin: 5px;
+  padding: 3px 20px;
+  border-radius: 26px;
+  border: 1px solid #4caf50;
+}
+
+.tab-btn-selected{
+  background-color: #fff;
+  color: #4caf50;
+  margin: 5px;
+  padding: 3px 20px;
+  border-radius: 26px;
+  border: 1px solid #4caf50;
+}

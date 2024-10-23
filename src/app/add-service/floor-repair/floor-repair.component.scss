@@ -1,0 +1,64 @@
+.add-service{
+  background-color: #59BD2F;
+  color: #fff;
+  width: 80%;
+}
+
+.add-card{
+  margin: 8px 4px;
+  border-radius: 12px;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.content{
+  padding: 16px;
+}
+
+.add-button{
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 16px;
+  margin-top: 12px;
+  padding: 4px 8px;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.content{
+  padding: 4px;
+  text-align: left;
+}
+
+.package-card{
+  margin-bottom: 8px;
+  border-radius: 12px;
+}
+
+.heading{
+  font-size: large;
+  color: #4caf50;
+  margin-bottom: 12px;
+}
+
+.thumbnail {
+  height: 80px;
+  width: 80px;
+}
+
+.status-chip{
+  border-radius: 12px;
+  color: white;
+  padding: 4px 12px;
+  font-size: small;
+}
+
+.prod-img{
+  width: 70px;
+  height: 70px;
+}

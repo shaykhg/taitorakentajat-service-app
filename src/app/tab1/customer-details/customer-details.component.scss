@@ -1,0 +1,74 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.remove_btn{
+  color: #FA3333FF;
+  font-size: 24px;
+  background: none;
+  outline: none;
+  border-color: #FA3333FF;
+  margin-right: 10px;
+  //padding: 4px 4px 0 5px;
+}
+
+.edit_btn{
+  color: #2dd36f;
+  font-size: 24px;
+  background: none;
+  outline: none;
+  border-color: #2dd36f;
+  //padding: 4px 4px 2px 8px;
+}
+
+.service_card{
+  padding: 10px;
+}
+
+.mat-card{
+  margin: 15px 0;
+  border-radius: 20px;
+}
+.update_btn{
+  border-color: #2dd36f;
+  color: #2dd36f;
+}
+
+.service_row{
+  padding:8px;
+}
+
+.label{
+  color: #767676;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  z-index: 99;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.content{
+  padding: 4px;
+  text-align: left;
+}
+
+.booking-card{
+  margin: 12px;
+  border-radius: 12px;
+}
+
+.heading{
+  font-size: large;
+  color: #4caf50;
+}
+
+.thumbnail {
+  height: 80px;
+  width: 80px;
+}

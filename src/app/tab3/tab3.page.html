@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <div class="dis-flex ion-justify-content-between">
+        <span>Booking History</span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+<h3 class="m-l-15 m-t-25 m-b-25">List all previous Bookings</h3>
+
+<!--    <div class="ion-text-center">-->
+<!--      <ion-spinner *ngIf="progress; else bookingDetail" class="m-t-100" color="#4caf50" name="lines"></ion-spinner>-->
+<!--    </div>-->
+<!--    -->
+    <div *ngIf="progress; else bookingDetail">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+    </div>
+
+    <ng-template #bookingDetail>
+
+      <div *ngIf="allBookings.length > 0; else noBooking">
+        <div *ngFor="let booking of allBookings">
+          <ion-card [routerLink]="'/booking-details/' + booking.id"  class="booking-cont">
+            <div class="booking-item m-b-15 ion-justify-content-between">
+              <span><b>#{{booking.id}}</b></span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="person-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.fname}} {{booking.lname}}</span>
+            </div>
+            <div class="booking-item">
+              <span><ion-icon name="home-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{booking.building}}, {{booking.city}}, {{booking.postcode}}</span>
+            </div>
+
+            <div class="booking-item">
+              <span><ion-icon name="calendar-outline" class="icon"></ion-icon></span>
+              <span class="booking-item-title">{{getTime(booking.date)}}</span>
+            </div>
+          </ion-card>
+        </div>
+
+      </div>
+
+      <ng-template #noBooking>
+        <div class="ion-text-center m-t-100">
+          <img src="/assets/images/open-box.png" alt="" style="width: 25%;height: auto">
+        </div>
+        <h2 class="ion-text-center m-t-20">No previous bookings found!</h2>
+      </ng-template>
+    </ng-template>
+
+  </div>
+</ion-content>

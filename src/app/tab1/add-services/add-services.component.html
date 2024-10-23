@@ -1,0 +1,313 @@
+<div *ngIf="chooseService">
+  <div *ngIf="chooseService.viewType ===0" class="mt-4">
+    <div *ngIf="dataShare.addFormVisible">
+      <p class="fw-medium mb-0">Area of the house to be painted (meter sq.) <sub class="info"
+                                                                                 matTooltip="Info about the action">
+        &#8505;</sub></p>
+      <form *ngIf="dataShare.addFormVisible" [formGroup]="exteriorPainting" class="mt-4">
+        <mat-slider
+          (change)="getMeterSq($event, 0)"
+          [displayWith]="formatLabel"
+          [value]="meterSq"
+          class="w-100"
+          formControlName="meterSq"
+          max="1000"
+          min="0"
+          thumbLabel
+          tickInterval="1000"></mat-slider>
+        <div class="d-flex justify-content-between">
+          <span>0</span>
+          <span>1000</span>
+        </div>
+
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Your own estimate of the amount of groundwork</mat-label>
+          <mat-select [(ngModel)]="selectedValue" formControlName="groundWork">
+            <mat-option *ngFor="let work of groundWorks" [value]="work.value">
+              {{work.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Paint in the same color?</mat-label>
+          <mat-select [(ngModel)]="selectedColor" formControlName="paint">
+            <mat-option *ngFor="let color of colors" [value]="color.value">
+              {{color.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button (click)="addServices(1, addServicePrice(selectedServicePrice))" [disabled]="!exteriorPainting.valid" class="add_service" mat-raised-button>
+            Add Service
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--  View type 1 Roof Area-->
+
+  <div *ngIf="chooseService.viewType === 1" class="mt-4">
+    <div *ngIf="dataShare.addFormVisible">
+      <div class="d-flex justify-content-between amount">
+        <p class="mb-0">Estimated Amount</p>
+        <div>
+          <p class="mb-0 fw-bold">
+            &euro; {{addServicePrice(this.dataShare.tempService.roofAreaPrice + this.dataShare.tempService.roofMaterialPrice + this.dataShare.tempService.roofIncensionPrice)}}</p>
+        </div>
+      </div>
+
+      <form [formGroup]="roofRenovationForm" class="mt-4">
+        <p class="fw-medium mb-0">Roof area</p>
+        <mat-slider
+          (change)="getMeterSq($event, 1)"
+          [displayWith]="formatLabel"
+          [value]="meterSq"
+          class="w-100"
+          formControlName="meterSquare"
+          max="1000"
+          min="10"
+          thumbLabel
+          tickInterval="1000"></mat-slider>
+        <div class="d-flex justify-content-between mb-4">
+          <span>10</span>
+          <span>1000</span>
+        </div>
+
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Roof Material</mat-label>
+          <mat-select [(value)]="selectedMaterial" (selectionChange)="addOptionsAmountView1(1, selectedMaterial)" formControlName="roofMaterial">
+            <mat-option *ngFor="let material of roofMaterial" [value]="material">
+              {{material.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Roof Incension</mat-label>
+          <mat-select (selectionChange)="addOptionsAmountView1(2, selectedIncension)" [(value)]="selectedIncension"
+                      formControlName="roofIncension">
+            <mat-option *ngFor="let incesion of roofIncension" [value]="incesion">
+              {{incesion.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button (click)="addServices(2, addServicePrice(this.selectedServicePrice))" [disabled]="!(meterSq > 0)" class="add_service" mat-raised-button>
+            Add Service
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!--  View type 2 Bathroom Renovation-->
+
+  <div *ngIf="chooseService.viewType === 2" class="mt-4">
+    <div *ngIf="dataShare.addFormVisible">
+      <form [formGroup]="bathroomReno">
+        <div class="d-flex justify-content-between amount mb-4">
+          <p class="mb-0">Estimated Amount</p>
+          <div>
+            <p class="mb-0 fw-bold">
+              &euro;{{addServicePrice(this.dataShare.tempService.bathroomRenovation + this.dataShare.tempService.noOfPointsPrice + this.dataShare.tempService.oldStructurePrice + this.dataShare.tempService.smoothingPrice + this.dataShare.tempService.refurbishmentPrice)}}</p>
+          </div>
+        </div>
+
+        <p class="fw-medium mb-0">Bathroom renovation </p>
+        <mat-slider
+          (change)="getMeterSq($event, 2)"
+          [displayWith]="formatLabel"
+          [value]="meterSq"
+          class="w-100"
+          formControlName="meterSquare"
+          max="1000"
+          min="10"
+          thumbLabel
+          tickInterval="1000"></mat-slider>
+        <div class="d-flex justify-content-between">
+          <span>10</span>
+          <span>1000</span>
+        </div>
+
+        <p class="mb-0 mt-4">Number of water points (taps, showers, etc.)</p>
+        <mat-slider
+          (change)="getWaterPoints($event)"
+          [displayWith]="formatLabel"
+          [value]="waterPoint"
+          class="w-100"
+          formControlName="water"
+          max="10"
+          min="1"
+          thumbLabel
+          tickInterval="1000"></mat-slider>
+        <div class="d-flex justify-content-between">
+          <span>1</span>
+          <span>10</span>
+        </div>
+
+        <section>
+          <div class="optional my-5">
+            <div class="d-flex justify-content-between">
+              <span>Demolition of old structures</span>
+              <mat-checkbox (change)="getServices($event, 1)" formControlName="oldStructure"></mat-checkbox>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+              <span>Smoothing, waterproofing, tiling</span>
+              <mat-checkbox (change)="getServices($event, 2)" formControlName="waterproofing"></mat-checkbox>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+              <span>Refurbishment of the sauna</span>
+              <mat-checkbox (change)="getServices($event, 3)" formControlName="refurbishment"></mat-checkbox>
+            </div>
+          </div>
+        </section>
+
+        <div>
+          <button (click)="addServices(3, addServicePrice(selectedServicePrice))" [disabled]="!(waterPoint > 0) || !(meterSq > 0)" class="add_service"
+                  mat-raised-button>Add Service
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!--  View type 3 Sauna renovation-->
+
+  <div *ngIf="chooseService.viewType === 3" class="mt-4">
+    <div *ngIf="dataShare.addFormVisible">
+      <div class="d-flex justify-content-between amount mb-4">
+        <p class="mb-0">Estimated Amount</p>
+        <div>
+          <p class="mb-0 fw-bold">
+            &euro; {{addServicePrice(this.dataShare.tempService.saunaRenovationPrice + this.dataShare.tempService.newBenchesPrice + this.dataShare.tempService.newStovePrice + this.dataShare.tempService.newDoorPrice)}}</p>
+        </div>
+      </div>
+      <form [formGroup]="saunaRenovation">
+        <p class="fw-medium mb-0">Sauna renovation </p>
+        <mat-slider
+          (change)="renovation($event)"
+          [displayWith]="formatLabel"
+          [value]="renovate"
+          class="w-100"
+          formControlName="meterSquare"
+          max="15"
+          min="1"
+          thumbLabel
+          tickInterval="1000"></mat-slider>
+        <div class="d-flex justify-content-between">
+          <span>1</span>
+          <span>15</span>
+        </div>
+
+
+        <div class="optional my-5">
+          <div class="d-flex justify-content-between">
+            <span>New benches</span>
+            <mat-checkbox (change)=" addSaunaRenovation($event, 1)" [value]="benches"
+                          formControlName="benches"></mat-checkbox>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between">
+            <span>New stove</span>
+            <mat-checkbox (change)=" addSaunaRenovation($event, 2)" [value]="stove"
+                          formControlName="stove"></mat-checkbox>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between">
+            <span>New Door</span>
+            <mat-checkbox (change)=" addSaunaRenovation($event, 3)" [value]="door"
+                          formControlName="door"></mat-checkbox>
+          </div>
+        </div>
+
+
+        <div>
+          <button (click)="addServices(4, addServicePrice(selectedServicePrice))" [disabled]="!(renovate > 0)" class="add_service" mat-raised-button>Add
+            Service
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!--  View type 4 Interior painting-->
+
+  <div *ngIf="chooseService.viewType === 4" class="mt-4">
+    <div *ngIf="dataShare.addFormVisible">
+      <form [formGroup]="interiorPainting" class="mt-4">
+        <div class="d-flex justify-content-between amount mb-4">
+          <p class="mb-0">Estimated Amount</p>
+          <div>
+            <p class="mb-0 fw-bold">
+              &euro; {{addServicePrice(this.dataShare.tempService.areaPrice + this.dataShare.tempService.baseJobPrice + this.dataShare.tempService.sameColorPrice)}}</p>
+          </div>
+        </div>
+
+        <p class="mb-0">Area of the house to be painted</p>
+        <mat-slider
+          (change)="getMeterSq($event, 4)"
+          [displayWith]="formatLabel"
+          [value]="meterSq"
+          class="w-100"
+          formControlName="meterSquare"
+          max="1000"
+          min="0"
+          thumbLabel
+          tickInterval="1000">
+
+        </mat-slider>
+
+        <div class="d-flex justify-content-between">
+          <span>0</span>
+          <span>1000</span>
+        </div>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Your own estimate of the number of base jobs</mat-label>
+          <mat-select (selectionChange)="addOptionsAmountView4(1, selectedBaseWork)" [(value)]="selectedBaseWork"
+                      formControlName="baseJob">
+            <mat-option *ngFor="let work of baseWork" [value]="work">
+              {{work.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Paint in the same color?</mat-label>
+          <mat-select (selectionChange)="addOptionsAmountView4(2, selectedBaseWork)" [(value)]="selectedColor"
+                      formControlName="paint">
+            <mat-option *ngFor="let color of colors" [value]="color">
+              {{color.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button (click)="addServices(5, addServicePrice(selectedServicePrice))" [disabled]="!interiorPainting.valid" class="add_service" mat-raised-button>
+            Add Service
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+  <!--  <div *ngIf="hideServiceBtn" class="service_btn">-->
+  <!--    <button mat-raised-button class="add_service">Add More Service</button>-->
+  <!--    <span></span> <sub matTooltip="Info about the action" class="info info_i"> &#8505;</sub>-->
+  <!--  </div>-->
+</div>
+
+

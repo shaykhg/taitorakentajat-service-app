@@ -1,0 +1,58 @@
+<div *ngIf="serviceData">
+  {{service | json}}
+  <div class="content" *ngIf="service">
+    <mat-card class="add-card mat-elevation-z3">
+      <div>
+        <div *ngFor="let param of service.params">
+          <div *ngIf="param.type === 'm2'">
+            <p>{{param.question}}</p>
+            <p *ngIf="param.value">{{param.value}}m<sup>2</sup></p>
+            <mat-slider
+              (valueChange)="calculatePrice()"
+              [(ngModel)]="param.value"
+              class="w-100"
+              max="3000"
+              min="0"
+              thumbLabel
+              tickInterval="1000"></mat-slider>
+            <div class="d-flex justify-content-between">
+              <span>0</span>
+              <span>3000</span>
+            </div>
+          </div>
+
+          <div *ngIf="param.type === 'option'">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>{{param.question}}</mat-label>
+              <mat-select [(ngModel)]="param.value" (selectionChange)="selection($event, param)">
+                <mat-option *ngFor="let option of param.options" [value]="option.value">{{option.view}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row estimation" *ngIf="totalPrice > 0">
+          <div class="col">Estimated Service Cost</div> <div class="col t-right">&euro;{{totalPrice}}</div>
+        </div>
+        <button mat-raised-button (click)="addService()" class="add-btn" [disabled]="isInvalid()">Add Service</button>
+      </div>
+
+    </mat-card>
+
+    <mat-card *ngFor="let pack of packages" class="add-card mat-elevation-z3">
+      <div class="row">
+        <div class="col">
+          <h5>{{pack.name}}</h5>
+        </div>
+        <div class="col-auto">
+          <mat-checkbox (change)="addPackage($event, pack)" [(ngModel)]="pack.checked"></mat-checkbox>
+        </div>
+      </div>
+    </mat-card>
+
+
+
+    <button mat-raised-button (click)="updateService()" class="add-button" [disabled]="selectedPacks.length === 0">Update  Service</button>
+
+  </div>
+</div>

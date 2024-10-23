@@ -1,0 +1,156 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Manage Slots
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<!--  <ion-header collapse="condense">-->
+<!--    <ion-toolbar>-->
+<!--      <ion-title size="large">Manage Slots</ion-title>-->
+<!--    </ion-toolbar>-->
+<!--  </ion-header>-->
+
+  <div class="row m-t-20 p-l-15 p-r-15">
+    <button class=" col" mat-flat-button [class]="type === 2 ? 'tab-btn': 'tab-btn-selected'" (click)="this.type = 2">Book</button>
+
+    <button class=" col" mat-flat-button [class]="type === 1 ? 'tab-btn': 'tab-btn-selected'" (click)="(this.type = 1) && getSlots()">Details</button>
+
+
+  </div>
+
+  <div *ngIf="type === 1; else add">
+
+    <div class="ion-text-center">
+      <ion-spinner *ngIf="progress; else slotDetail" class="m-t-100" color="#4caf50" name="lines"></ion-spinner>
+    </div>
+
+
+    <ng-template #slotDetail>
+      <div *ngIf="slots.length > 0; else noSlots">
+        <h5 class="m-l-25 t-left">List of slots</h5>
+        <hr class="m-l-10 m-r-10">
+
+        <ion-card *ngFor="let slot of slots">
+          <div class="slot-item"><ion-icon name="calendar-outline"></ion-icon> {{getDate(slot.date, false)}} </div>
+          <div class="slot-item"><ion-icon name="business-outline"></ion-icon> {{slot.city | titlecase}} </div>
+          <div class="slot-item"><ion-icon name="stopwatch-outline"></ion-icon>Start:  {{getDate(slot.start, true)}} </div>
+          <div class="slot-item-cancel">
+
+            <div class="dis-flex ion-justify-content-between">
+              <span><ion-icon name="stopwatch-outline"></ion-icon>End:  {{getDate(slot.end, true)}}</span>
+              <span><button (click)="showAlert(slot.id)" class="cncl-btn" mat-flat-button>Cancel</button></span>
+            </div>
+
+          </div>
+        </ion-card>
+      </div>
+
+    </ng-template>
+
+
+    <ng-template #noSlots>
+      <div class="ion-text-center m-t-100">
+        <img src="/assets/images/select.png" alt="" style="width: 25%;height: auto">
+      </div>
+      <h2 class="ion-text-center m-t-20 green">No slots found!</h2>
+    </ng-template>
+  </div>
+
+  <ng-template #add>
+    <div >
+
+<!--      <ion-grid>-->
+<!--        <ion-row>-->
+<!--          <ion-col>-->
+<!--            <button (click)="prevMonth()" mat-raised-button>Prev</button>-->
+<!--          </ion-col>-->
+<!--          <ion-col>-->
+<!--            {{formatDate(month, 'MMMM')}}-->
+<!--          </ion-col>-->
+<!--          <ion-col>-->
+<!--            <button (click)="nextMonth()" mat-raised-button>Next</button>-->
+<!--          </ion-col>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+
+<!--      <div class="scrollmenu">-->
+<!--        <a *ngFor="let day of days" (click)="setDate(day)">-->
+<!--          <div>{{formatDate(day, 'ddd')}}</div>-->
+<!--          <div>{{formatDate(day, 'DD')}}</div>-->
+<!--        </a>-->
+<!--      </div>-->
+      <div class="bo-rad-12">
+<!--        <div class="card-content">-->
+<!--          <h3 class="m-b-8 green">Add Slot</h3>-->
+<!--          <form [formGroup]="slotForm" (ngSubmit)="addSlots()">-->
+<!--            <mat-form-field appearance="outline" class="w-full">-->
+<!--              <mat-label>Date</mat-label>-->
+<!--              <input [min]="currentDate" matInput [matDatepicker]="dp3" formControlName="date">-->
+<!--              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>-->
+<!--              <mat-datepicker #dp3></mat-datepicker>-->
+<!--              <mat-error>Please enter the correct date</mat-error>-->
+<!--            </mat-form-field>-->
+
+<!--            <mat-form-field appearance="outline" class="w-full">-->
+<!--              <mat-label>Choose From Time</mat-label>-->
+<!--              <input [ngxTimepicker]="from" matInput formControlName="from" readonly>-->
+<!--              <ngx-material-timepicker [format]=24 [theme]="clockTheme" #from readonly></ngx-material-timepicker>-->
+<!--              <mat-error>Please enter correct from time</mat-error>-->
+<!--            </mat-form-field>-->
+
+<!--            <mat-form-field appearance="outline" class="w-full">-->
+<!--              <mat-label>Till Time</mat-label>-->
+<!--              <input [ngxTimepicker]="till" matInput formControlName="till">-->
+<!--              <ngx-material-timepicker [format]="24"  [theme]="clockTheme" #till readonly></ngx-material-timepicker>-->
+<!--              <mat-error>Please enter correct till time</mat-error>-->
+<!--            </mat-form-field>-->
+
+<!--            <button mat-raised-button type="submit" class="add-button">Add Slot</button>-->
+<!--          </form>-->
+<!--        </div>-->
+        <h5 class="m-l-25">Select schedule</h5>
+        <hr class="m-l-10 m-r-10">
+
+        <ion-card>
+          <ion-list>
+            <ion-item>
+              <ion-label>Start Date</ion-label>
+              <ion-datetime [min]="date" [(ngModel)]="selectDate"  placeholder="Select Date"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Start Time</ion-label>
+              <ion-datetime placeholder="Select Start Time" [(ngModel)]="startTime" display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Ends</ion-label>
+              <ion-datetime placeholder="Select End Time" [(ngModel)]="endTime" display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+            </ion-item>
+            <div class="dis-flex ion-justify-content-between">
+              <ion-label class="self-center m-l-25">City</ion-label>
+              <mat-form-field appearance="standard">
+                <input placeholder="Enter City" type="text" matInput  [matAutocomplete]="auto"  [(ngModel)]="mCity" (input)="changedCity(city.value)" #city>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredCities" [value]="option.name" (click)="mCity = option.name">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+            </div>
+          </ion-list>
+
+        </ion-card>
+        <div class="m-l-25 m-t-25">
+          <button mat-flat-button class="save" (click)="saveSlot()">Save Slot</button>
+        </div>
+      </div>
+
+
+    </div>
+  </ng-template>
+
+
+</ion-content>

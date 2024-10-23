@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Service</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()"><ion-icon name="close" class="fs-28"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content" *ngIf="serviceMain">
+    <mat-card class="booking-card">
+      <app-floor-repair [service]="serviceMain" [editMode]="true" (serviceComplete)="updateService($event)" *ngIf="serviceMain.viewType === 6"></app-floor-repair>
+      <app-paint [service]="serviceMain" [editMode]="true" (serviceComplete)="updateService($event)" *ngIf="serviceMain.viewType === 7"></app-paint>
+    </mat-card>
+  </div>
+</ion-content>
+

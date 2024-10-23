@@ -1,0 +1,94 @@
+.card-content{
+  padding: 16px;
+  width: 100%;
+}
+
+.add-button{
+  border-radius: 8px;
+  color: white;
+  background-color: #4caf50;
+  padding: 4px 24px;
+}
+
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.scrollmenu a:hover {
+  background-color: #777;
+}
+
+.tab-btn{
+  background-color: #4caf50;
+  color: white;
+  margin: 5px;
+  padding: 3px 20px;
+  border-radius: 26px;
+  border: 1px solid #4caf50;
+}
+
+.tab-btn-selected{
+  background-color: #fff;
+  color: #4caf50;
+  margin: 5px;
+  padding: 3px 20px;
+  border-radius: 26px;
+  border: 1px solid #4caf50;
+}
+
+.slot-item{
+  padding: 10px;
+  font-size: 18px;
+  border-bottom: 1px solid #7ed490;
+  background-color: #d5eed5;
+  display: flex;
+
+  ion-icon{
+    align-self: center;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+}
+.slot-item-cancel{
+  padding: 10px;
+  font-size: 18px;
+  border-bottom: 1px solid #7ed490;
+  background-color: #d5eed5;
+
+  ion-icon{
+    align-self: center;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+}
+
+.cncl-btn{
+  border-radius: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding:  0 24px;
+  font-size: 16px;
+}
+
+
+.save{
+  background-color: #4caf50;
+  color: white;
+  padding: 0 35px;
+  border-radius: 18px;
+  font-size: 18px;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
